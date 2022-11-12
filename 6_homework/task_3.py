@@ -11,6 +11,7 @@ s = float(input())
 result = sum(int(i) for i in str(s) if i.isdigit())
 print('Сумма цифр введенного числа =', result)
 
+
 ВАРИАНТ 2:
 '''
 print('Введите число:')
