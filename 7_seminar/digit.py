@@ -42,4 +42,5 @@ def calculate(lst):             # расчет
                 lst = lst[:index-1] + [result] + lst[index+2:]   
 
     return result
+    
  
