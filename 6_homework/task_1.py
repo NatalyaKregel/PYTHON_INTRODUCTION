@@ -9,3 +9,4 @@ new_list = list(filter(lambda x: (len(str(x)) == 2) , my_list))
 print(new_list)
 
 
+
