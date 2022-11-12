@@ -12,3 +12,5 @@ with open("file.txt", "r") as file:
             print(spisok[i] - 1)
 
             
+
+
