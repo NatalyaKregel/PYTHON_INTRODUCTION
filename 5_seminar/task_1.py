@@ -11,6 +11,7 @@ with open("file.txt", "r") as file:
         if spisok[i] - 1 != spisok[i-1]:
             print(spisok[i] - 1)
 
+
             
 
 
