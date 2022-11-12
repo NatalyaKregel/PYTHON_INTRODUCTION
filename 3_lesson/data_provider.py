@@ -11,4 +11,8 @@ def get_wind_speed(sensor):
     else:
         return randint(30,50)
 
+
+
+        
+
            
