@@ -10,3 +10,4 @@ for i in list:
         break
 if count == 0:
     print('Нет')
+
