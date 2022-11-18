@@ -18,3 +18,6 @@ print('Введите число:')
 s = float(input())
 print(sum(map(float, filter(str.isdigit, str(s)))))
 #print('Сумма цифр введенного числа =', sum)
+
+
+#https://proglib.io/p/5-klassicheskih-zadach-po-python-dlya-nachinayushchih-s-resheniyami-2022-03-04
