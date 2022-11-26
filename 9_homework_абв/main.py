@@ -18,3 +18,6 @@ dispatсher.add_handler(start_handler)
 
 updater.start_polling()                        # начало бота
 updater.idle()                                 # конец бота  
+
+
+
