@@ -9,3 +9,6 @@ def get_data ():
     dom_phone = input('Введите домашний телефон: ')
     data.append(dom_phone)
     return data
+
+
+    
