@@ -68,8 +68,7 @@ def win (candy,move,move2):
         print('Победил человек')
     elif move2 == candy:
         print('Победил бот')
-    return     
-    
+    return       
             
 start_handler = CommandHandler('start', start)
 message_handler = MessageHandler(Filters.text, bet)
