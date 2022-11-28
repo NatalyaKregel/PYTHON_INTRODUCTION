@@ -2,11 +2,9 @@ from telegram import Bot
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from random import randint
 
-
 bot = Bot(token='5712662084:AAEHqQVWAJNeLaa7j8tZdOcxj59Dg5ZzYq4')
 updater = Updater(token='5712662084:AAEHqQVWAJNeLaa7j8tZdOcxj59Dg5ZzYq4')
 dispatcher = updater.dispatcher             # находится мозг нашего бота
-
 
 def start(update, context):
     context.bot.send_message(update.effective_chat.id, 'Какова ваша ставка?')
@@ -60,11 +58,6 @@ def win(list,stavka):                       # определяем выигры�
             elif list[step[0]]==4:
                 pobeda+=stavka*5
     return pobeda
-
-  
-
-
-
 
 start_handler = CommandHandler('hello', start)
 message_handler = MessageHandler(Filters.text, bet)
