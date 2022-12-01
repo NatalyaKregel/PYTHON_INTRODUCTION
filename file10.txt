@@ -1,3 +1,5 @@
 ID user: 1271083951, Input: 2*9, Result: 18
 ID user: 1271083951, Input: 2/2, Result: 1.0
 ID user: 1271083951, Input: 2.5+3.6, Result: 8
+ID user: 1271083951, Input: 26*2, Result: 52
+ID user: 1271083951, Input: 26*6, Result: 156

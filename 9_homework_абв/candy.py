@@ -8,15 +8,14 @@ dispatcher = updater.dispatcher             # находится мозг наш
 
 start = 0
 A = 1
-select_man = 2
-select_bot = 3
+move = 2
+move2 = 3
 win_bot = 4
-
 
 def start(update, context):
     context.bot.send_message(update.effective_chat.id, 'Привет!\nДавай поиграем в игру: кто заберет последнюю конфету тот и победил.')
     context.bot.send_message(update.effective_chat.id, 'Сколько конфет ты берешь?')
-    return
+    return start
 
 def start_candy(update, context):           #условие игры
     candy = int(2021)
@@ -24,8 +23,45 @@ def start_candy(update, context):           #условие игры
     context.bot.send_message(update.effective_chat.id, f'За один ход можно взять не более {max_candy} конфет')
     return A
 
+def who_first(update, context):
+    global complexity
+    context.bot.send_message(update.effective_chat.id, 'Сейчас определим, кто будет ходить первым')
+    for i in range(3, 0, -1):  
+        context.bot.send_message(update.effective_chat.id, i)
+    first_player = randint(0, 1)
+    if first_player:
+        context.bot.send_message(update.effective_chat.id, 'ТЫ ходишь первым!')
+        return move
+    else:
+        context.bot.send_message(update.effective_chat.id, 'Я хожу первым!')
+        select_bot(update, context)
+        return move
+
 def select_man (update, context,max_candy):
-    start_candy
+    global start_candy
+    global num_start
+    chislo = update.message.text
+    for i in range(28,0,-1):                                                                  
+        if i % 2 == 1:
+            if chislo.isdigit():
+                chislo = int(chislo)
+            else:
+                context.bot.send_message(update.effective_chat.id, f'Введены не верные данные')
+                return move
+
+    if chislo > max_candy or chislo <= 0 or chislo > num_start:
+        context.bot.send_message(update.effective_chat.id, f'Введены не верные данные')
+        return move
+
+    num_start -= chislo
+    context.bot.send_message(update.effective_chat.id, f'Осталось {num_start}')
+
+    if num_start > 0:
+        select_bot(update, context)
+    else:
+        win_man(update, context)
+        return ConversationHandler.END
+'''        
     for i in range(candy,0,-1):                                                                  
         if i % 2 == 1:
             move = int(input())
@@ -50,8 +86,8 @@ def select_man (update, context,max_candy):
                     move=int(input())
                     if move == candy:
                         break      
-    return ConversationHandler.END
-
+    #return ConversationHandler.END
+'''
 def select_bot (update, context,candy,max_candy):
     for i in range(candy,0,-1):         
         if i % 2 == 0:
@@ -63,31 +99,35 @@ def select_bot (update, context,candy,max_candy):
                 return select_man
                         
 def win_man (update, context):
-    context.bot.send_message(update.effective_chat.id, f'Поздравляю!!!Вы победили!!!')
+    context.bot.send_message(update.effective_chat.id, f'Поздравляю!!!Ты победил!!!')
 
 def win_bot (update, context):
-        context.bot.send_message(update.effective_chat.id, f'Я победил!!!')
-    
+        context.bot.send_message(update.effective_chat.id, f'Я победил!!!')  
          
 def cancel_bot(update, context):
-    context.bot.send_message(update.effective_chat.id, 'Прощай!') 
+    context.bot.send_message(update.effective_chat.id, 'Пока!') 
     return ConversationHandler.END
     
 def cancel(update, context):
-    context.bot.send_message(update.effective_chat.id, 'Прощай!')        
-
+    context.bot.send_message(update.effective_chat.id, 'Пока!')        
             
 start_handler = CommandHandler('start', start)
-max_candy_handler = MessageHandler(Filters.text, start_candy)
+start_candy_handler = MessageHandler(Filters.text, start_candy)
 select_man_handler = MessageHandler(Filters.text, select_man)
 select_bot_handler = MessageHandler(Filters.text, select_bot)
 win_bot_handler = MessageHandler(Filters.text, cancel_bot)
 mes_candy_handler = MessageHandler(Filters.text, cancel)
 
 conv_handler = ConversationHandler(entry_points=[start_handler],
-                                   states={start: [max_candy_handler],
-                                           A: [start_candy],
-                                           select_man: [select_man_handler],
-                                           select_bot: [select_bot_handler],
+                                   states={start: [start_candy_handler],
+                                           A: [start_candy_handler],
+                                           move: [select_man_handler],
+                                           move2: [select_bot_handler],
                                            win_bot: [win_bot_handler]},
                                    fallbacks=[mes_candy_handler])
+
+start_handler = MessageHandler(Filters.text, start)
+dispatcher.add_handler(start_handler)          
+
+updater.start_polling()                       
+updater.idle()                                
