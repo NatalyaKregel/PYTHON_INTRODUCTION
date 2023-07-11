@@ -269,4 +269,4 @@ stroka = "3a4b2c3b"
 
 Фамилия_2,Имя_2,Телефон_2,Описание_2
 
-:point_right: [Перейти к решению](https://github.com/NatalyaKregel/Python/blob/master/7_homework/task1.py "Открыть")
+:point_right: [Перейти к решению](https://github.com/NatalyaKregel/Python/blob/master/7_homework_phonebook "Открыть")
